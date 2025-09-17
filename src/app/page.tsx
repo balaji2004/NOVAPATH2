@@ -1,74 +1,114 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Compass, CalendarDays, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-
-const features = [
-  {
-    icon: Compass,
-    title: 'Personalized Career Path',
-    description: 'Discover your future with AI-driven career suggestions.',
-    href: '/career-path',
-    delay: '100ms',
-  },
-  {
-    icon: CalendarDays,
-    title: 'Interactive Timeline',
-    description: 'Never miss a deadline with our smart milestone tracker.',
-    href: '/timeline',
-    delay: '200ms',
-  },
-];
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-24 sm:py-32">
-      <div className="flex flex-col items-center text-center">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter font-headline holographic-text">
-          EduVoyager
+    <div className="container mx-auto px-4 py-12 sm:py-24 overflow-hidden">
+      <div className="relative">
+        <div className="absolute top-[-5rem] -left-24 w-72 h-72 bg-primary rounded-full mix-blend-lighten filter blur-3xl opacity-20 animate-float"></div>
+        <div className="absolute top-[-1rem] -right-24 w-80 h-80 bg-accent rounded-full mix-blend-lighten filter blur-3xl opacity-20 animate-float" style={{animationDelay: '2s'}}></div>
+      </div>
+      <section className="text-center relative z-10">
+        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-gray-200 to-gray-500 mb-6">
+          Navigate Your Future with
+          <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary mt-2">
+            NovaPath
+          </span>
         </h1>
-        <p className="mt-4 max-w-2xl text-lg md:text-xl text-muted-foreground">
-          Navigate Your Future. Discover your path to success with AI-powered
-          guidance, immersive campus tours, and a personalized journey.
+        <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-10">
+          An ultra-modern guidance platform using AI to illuminate your career and educational journey. Step into the future of decision-making.
         </p>
-        <div className="mt-8 flex gap-4">
-          <Button
-            asChild
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 pulse-button"
-          >
-            <Link href="/career-path">
-              Start Your Voyage <ArrowRight className="ml-2 h-5 w-5" />
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button asChild size="lg" className="pulse-button shadow-primary/50 shadow-lg hover:shadow-primary/50 hover:shadow-2xl transition-shadow">
+            <Link href="/quiz">
+              Find Your Path <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
+          <Button asChild size="lg" variant="outline">
+            <Link href="/timeline">Explore Timeline</Link>
+          </Button>
         </div>
-      </div>
+      </section>
 
-      <div className="mt-20 md:mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
-        {features.map((feature) => (
-          <Link href={feature.href} key={feature.title}>
-            <Card
-              className="glass-card h-full group animate-in fade-in"
-              style={{ animationDelay: feature.delay }}
-            >
-              <CardHeader className="flex flex-col items-center text-center">
-                <div className="p-4 bg-primary/10 rounded-full mb-4 border border-primary/20">
-                  <feature.icon className="w-8 h-8 text-primary" />
+      <section className="mt-24 md:mt-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            icon={<Target className="h-8 w-8 text-primary" />}
+            title="AI Career Matcher"
+            description="Our advanced AI analyzes your interests, skills, and personality to suggest the perfect career paths for you."
+          />
+          <FeatureCard
+            icon={<CalendarCheck className="h-8 w-8 text-primary" />}
+            title="Interactive Timeline"
+            description="Never miss a deadline. Track exams, admissions, and scholarships on a personalized, interactive timeline."
+          />
+          <FeatureCard
+            icon={<FileQuestion className="h-8 w-8 text-primary" />}
+            title="Gamified Quiz System"
+            description="Engaging quizzes make self-discovery fun. Watch your future unfold with every answer."
+          />
+          <FeatureCard
+            icon={<Bot className="h-8 w-8 text-primary" />}
+            title="Nova - Smart AI Assistant"
+            description="Nova is your dedicated AI assistant, ready to provide career guidance and educational recommendations."
+          />
+        </div>
+      </section>
+
+      <section id="contact" className="mt-24 md:mt-32 scroll-mt-20">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                Get in Touch
+            </h2>
+            <p className="mt-2 text-lg text-muted-foreground">
+                Have questions? We'd love to hear from you.
+            </p>
+        </div>
+        <Card className="max-w-3xl mx-auto bg-card/60 backdrop-blur-md border border-primary/20 p-8">
+            <form action="#" method="POST" className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <label htmlFor="name" className="text-sm font-medium text-muted-foreground">Full Name</label>
+                        <div className="relative">
+                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input id="name" name="name" type="text" placeholder="John Doe" className="pl-10" />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                         <label htmlFor="email" className="text-sm font-medium text-muted-foreground">Email Address</label>
+                        <div className="relative">
+                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                            <Input id="email" name="email" type="email" placeholder="you@example.com" className="pl-10"/>
+                        </div>
+                    </div>
                 </div>
-                <CardTitle className="font-headline text-xl">
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-muted-foreground">
-                <p>{feature.description}</p>
-                <div className="mt-6 flex justify-center items-center text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Explore <ArrowRight className="ml-2 h-4 w-4" />
+                <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium text-muted-foreground">Message</label>
+                    <Textarea id="message" name="message" rows={5} placeholder="Your message..." />
                 </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
+                <div>
+                    <Button type="submit" className="w-full" size="lg">
+                        Send Message <Send className="ml-2 h-5 w-5" />
+                    </Button>
+                </div>
+            </form>
+        </Card>
+      </section>
+
     </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+  return (
+    <Card className="bg-card/60 backdrop-blur-md border border-primary/20 p-8 text-center items-center flex flex-col hover:border-primary/40 transition-all duration-300 transform hover:-translate-y-2">
+      <div className="mb-4">{icon}</div>
+      <h3 className="font-headline text-2xl font-bold mb-2">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </Card>
   );
 }

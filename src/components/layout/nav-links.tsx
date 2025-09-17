@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/career-path', label: 'Career Path' },
+  { href: '/quiz', label: 'Quiz' },
   { href: '/timeline', label: 'Timeline' },
+  { href: '/career-path', label: 'Career Path' },
 ];
 
 export function NavLinks() {

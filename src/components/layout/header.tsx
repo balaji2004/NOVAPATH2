@@ -16,7 +16,7 @@ export function Header() {
           href="/"
           className="mr-6 flex items-center space-x-2 font-headline font-bold text-2xl holographic-text"
         >
-          EduVoyager
+          NovaPath
         </Link>
         <NavLinks />
         <div className="ml-auto flex items-center space-x-4">

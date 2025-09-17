@@ -8,7 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
-  title: 'EduVoyager',
+  title: 'NovaPath',
   description:
     'Revolutionizing student career guidance with breathtaking aesthetics and immersive interactions.',
 };
