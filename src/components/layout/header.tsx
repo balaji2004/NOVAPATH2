@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/popover';
 import { ThemeToggleButton } from './theme-toggle-button';
 import { MobileNav } from './mobile-nav';
+import { Logo } from '../icons/logo';
 
 export function Header() {
   return (
@@ -16,9 +17,10 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center px-4">
         <Link
           href="/"
-          className="mr-6 flex items-center space-x-2 font-headline font-bold text-2xl holographic-text"
+          className="mr-6 flex items-center space-x-2 font-headline font-bold text-2xl"
         >
-          NovaPath
+          <Logo />
+          <span className="holographic-text">NovaPath</span>
         </Link>
         <div className="hidden md:flex flex-1">
           <NavLinks />

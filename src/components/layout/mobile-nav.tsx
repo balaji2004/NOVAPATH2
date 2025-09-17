@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navItems } from "./nav-links";
 import { cn } from "@/lib/utils";
+import { Logo } from "../icons/logo";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,10 +29,11 @@ export function MobileNav() {
               <div className="flex items-center justify-between">
                 <Link
                   href="/"
-                  className="font-headline font-bold text-2xl holographic-text"
+                  className="flex items-center space-x-2 font-headline font-bold text-2xl"
                   onClick={() => setIsOpen(false)}
                 >
-                  NovaPath
+                  <Logo />
+                  <span className="holographic-text">NovaPath</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
                   <X className="h-6 w-6" />
