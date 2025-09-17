@@ -35,7 +35,7 @@ export default function Home() {
           <Button
             asChild
             size="lg"
-            className="bg-accent text-accent-foreground hover:bg-accent/90 pulse-button"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 pulse-button"
           >
             <Link href="/career-path">
               Start Your Voyage <ArrowRight className="ml-2 h-5 w-5" />

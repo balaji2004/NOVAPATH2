@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Bot, Sparkles, X, Mic, Send, CornerDownLeft } from "lucide-react";
+import { Bot, Sparkles, X, Mic, Send } from "lucide-react";
 import {
   provideContextualHelp,
 } from "@/ai/flows/provide-contextual-help";
@@ -106,11 +106,11 @@ export function AIAvatar() {
                                 <div className="flex items-center gap-3">
                                     <div className="relative">
                                         <Bot className="w-8 h-8 text-primary" />
-                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-card" />
+                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-accent rounded-full border-2 border-card" />
                                     </div>
                                     <div>
                                         <p className="font-bold text-lg font-headline">EduVoyager AI</p>
-                                        <p className="text-xs text-green-400">Online</p>
+                                        <p className="text-xs text-accent">Online</p>
                                     </div>
                                 </div>
                                 <Button
