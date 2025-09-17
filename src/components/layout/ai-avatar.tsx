@@ -32,7 +32,7 @@ export function AIAvatar() {
     const predictiveMessages = [
         "What can you do?",
         "Tell me about career paths.",
-        "What is EduVoyager?",
+        "What is NovaPath?",
     ];
 
     const getHelp = useCallback(async (message: string) => {
@@ -106,11 +106,11 @@ export function AIAvatar() {
                                 <div className="flex items-center gap-3">
                                     <div className="relative">
                                         <Bot className="w-8 h-8 text-primary" />
-                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-accent rounded-full border-2 border-card" />
+                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full border-2 border-card" />
                                     </div>
                                     <div>
-                                        <p className="font-bold text-lg font-headline">EduVoyager AI</p>
-                                        <p className="text-xs text-accent">Online</p>
+                                        <p className="font-bold text-lg font-headline">Nova AI</p>
+                                        <p className="text-xs text-blue-400">Online</p>
                                     </div>
                                 </div>
                                 <Button
@@ -125,8 +125,8 @@ export function AIAvatar() {
                             <CardContent ref={chatContainerRef} className="flex-1 p-4 space-y-4 overflow-y-auto">
                                 {messages.length === 0 && (
                                      <div className="text-center text-sm text-muted-foreground animate-in fade-in">
-                                        <Sparkles className="mx-auto h-8 w-8 text-accent mb-4" />
-                                        <p className="font-bold">Welcome to EduVoyager AI!</p>
+                                        <Sparkles className="mx-auto h-8 w-8 text-blue-500 mb-4" />
+                                        <p className="font-bold">Welcome to Nova AI!</p>
                                         <p>You can ask me anything about your career path or this website.</p>
                                      </div>
                                 )}
