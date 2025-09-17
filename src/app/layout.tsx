@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { BackgroundParticles } from '@/components/layout/background-particles';
 import { AIAvatar } from '@/components/layout/ai-avatar';
 import { Toaster } from '@/components/ui/toaster';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: 'EduVoyager',
@@ -27,7 +28,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -41,6 +42,7 @@ export default function RootLayout({
         <main className="relative z-10">{children}</main>
         <AIAvatar />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );

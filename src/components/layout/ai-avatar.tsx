@@ -2,127 +2,220 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Bot, Sparkles, X } from "lucide-react";
+import { Bot, Sparkles, X, Mic, Send, CornerDownLeft } from "lucide-react";
 import {
   provideContextualHelp,
-  type ProvideContextualHelpOutput,
 } from "@/ai/flows/provide-contextual-help";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { Textarea } from "../ui/textarea";
+
+interface Message {
+    id: string;
+    text: string;
+    sender: 'user' | 'ai';
+}
 
 export function AIAvatar() {
-  const [help, setHelp] = useState<ProvideContextualHelpOutput | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const pathname = usePathname();
-  const { toast } = useToast();
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [inputValue, setInputValue] = useState('');
+    const pathname = usePathname();
+    const { toast } = useToast();
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const pageDescriptions: { [key: string]: string } = {
-    "/": "The user is on the homepage, which gives an overview of EduVoyager's features.",
-    "/career-path":
-      "The user is on the Career Path page, where they can input their interests, skills, and academic history to get AI-generated career recommendations.",
-    "/timeline":
-      "The user is on the Interactive Timeline page, viewing important academic and career-related dates.",
-    "/campus-tour":
-      "The user is on the Interactive Campus Tour page, exploring virtual college campuses.",
-    "/achievements":
-      "The user is on the Achievements page, viewing their unlocked badges and progress.",
-  };
+    const predictiveMessages = [
+        "What can you do?",
+        "Tell me about career paths.",
+        "What is EduVoyager?",
+    ];
 
-  const getHelp = useCallback(async () => {
-    setIsLoading(true);
-    setIsOpen(false);
-    try {
-      const result = await provideContextualHelp({
-        pageContent: pageDescriptions[pathname] || "A page on EduVoyager.",
-        userActivity: "User has been on the page for a short while, potentially looking for guidance.",
-      });
+    const getHelp = useCallback(async (message: string) => {
+        setIsLoading(true);
+        const newMessage: Message = { id: `user-${Date.now()}`, text: message, sender: 'user' };
+        setMessages(prev => [...prev, newMessage]);
+        setInputValue('');
 
-      if (result.shouldProvideHelp) {
-        setHelp(result);
-        setIsOpen(true);
-      } else {
-        setHelp(null);
-        setIsOpen(false);
-      }
-    } catch (error) {
-      console.error("Error providing contextual help:", error);
-      toast({
-        variant: "destructive",
-        title: "AI Error",
-        description: "Could not get contextual help.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }, [pathname, toast]);
+        try {
+            const result = await provideContextualHelp({
+                userActivity: message,
+                pageContent: `The user is on the ${pathname} page.`,
+            });
+            
+            const aiMessage: Message = { id: `ai-${Date.now()}`, text: result.helpMessage, sender: 'ai' };
+            setMessages(prev => [...prev, aiMessage]);
 
-  useEffect(() => {
-    // Clear any existing timeouts when the page changes
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    setIsOpen(false); // Close bubble on navigation
-    setHelp(null);
+        } catch (error) {
+            console.error("Error providing contextual help:", error);
+            toast({
+                variant: "destructive",
+                title: "AI Error",
+                description: "Could not get a response from the AI.",
+            });
+            const aiErrorMessage: Message = { id: `ai-error-${Date.now()}`, text: "Sorry, I'm having trouble connecting. Please try again later.", sender: 'ai' };
+            setMessages(prev => [...prev, aiErrorMessage]);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [pathname, toast]);
 
-    // Set a new timeout to fetch help after a delay
-    timeoutRef.current = setTimeout(() => {
-      getHelp();
-    }, 10000); // 10 seconds delay
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
 
-    // Cleanup timeout on component unmount
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+    const handleSendMessage = (message: string) => {
+        if (message.trim()) {
+            getHelp(message);
+        }
     };
-  }, [pathname, getHelp]);
+    
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage(inputValue);
+        }
+    };
 
-  const handleAvatarClick = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else if (help) {
-      setIsOpen(true);
-    } else {
-      getHelp();
-    }
-  };
+    useEffect(() => {
+        if (isOpen) {
+            textareaRef.current?.focus();
+        }
+    }, [isOpen]);
 
-  return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {isOpen && help?.shouldProvideHelp && (
-        <Card className="mb-2 w-72 glass-card animate-in fade-in slide-in-from-bottom-5">
-          <CardContent className="p-4 relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-2 right-2 h-6 w-6"
-              onClick={() => setIsOpen(false)}
+
+    return (
+        <div className="fixed bottom-6 right-6 z-50">
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 50, scale: 0.9 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="w-[380px] h-[550px] mb-4 origin-bottom-right"
+                    >
+                        <Card className="w-full h-full glass-card flex flex-col">
+                            <CardHeader className="flex-row items-center justify-between p-4 border-b border-primary/20">
+                                <div className="flex items-center gap-3">
+                                    <div className="relative">
+                                        <Bot className="w-8 h-8 text-primary" />
+                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-card" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-lg font-headline">EduVoyager AI</p>
+                                        <p className="text-xs text-green-400">Online</p>
+                                    </div>
+                                </div>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-8 w-8"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <X className="h-5 w-5" />
+                                </Button>
+                            </CardHeader>
+                            <CardContent ref={chatContainerRef} className="flex-1 p-4 space-y-4 overflow-y-auto">
+                                {messages.length === 0 && (
+                                     <div className="text-center text-sm text-muted-foreground animate-in fade-in">
+                                        <Sparkles className="mx-auto h-8 w-8 text-accent mb-4" />
+                                        <p className="font-bold">Welcome to EduVoyager AI!</p>
+                                        <p>You can ask me anything about your career path or this website.</p>
+                                     </div>
+                                )}
+                                {messages.map((msg) => (
+                                    <div key={msg.id} className={cn("flex items-end gap-2", msg.sender === 'user' ? 'justify-end' : 'justify-start')}>
+                                        {msg.sender === 'ai' && <Bot className="w-6 h-6 text-primary flex-shrink-0" />}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className={cn(
+                                                "max-w-[80%] rounded-xl px-4 py-2.5 text-sm",
+                                                msg.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'
+                                            )}
+                                        >
+                                            {msg.text}
+                                        </motion.div>
+                                    </div>
+                                ))}
+                                {isLoading && (
+                                     <div className="flex items-end gap-2 justify-start">
+                                        <Bot className="w-6 h-6 text-primary flex-shrink-0" />
+                                        <div className="max-w-[80%] rounded-xl px-4 py-2.5 text-sm bg-muted flex items-center gap-2">
+                                            <span className="w-2 h-2 bg-primary/50 rounded-full animate-pulse " style={{animationDelay: '0s'}}/>
+                                            <span className="w-2 h-2 bg-primary/50 rounded-full animate-pulse " style={{animationDelay: '0.2s'}}/>
+                                            <span className="w-2 h-2 bg-primary/50 rounded-full animate-pulse " style={{animationDelay: '0.4s'}}/>
+                                        </div>
+                                     </div>
+                                )}
+                            </CardContent>
+                             <div className="p-4 border-t border-primary/20">
+                                {messages.length === 0 && (
+                                    <div className="flex gap-2 mb-2 flex-wrap">
+                                        {predictiveMessages.map(msg => (
+                                            <Button key={msg} size="sm" variant="outline" className="text-xs" onClick={() => handleSendMessage(msg)}>
+                                                {msg}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                )}
+                                <div className="relative">
+                                    <Textarea
+                                        ref={textareaRef}
+                                        value={inputValue}
+                                        onChange={(e) => setInputValue(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="Ask me anything..."
+                                        className="pr-20 min-h-[40px]"
+                                        rows={1}
+                                    />
+                                    <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
+                                            <Mic className="h-4 w-4" />
+                                        </Button>
+                                        <Button size="icon" className="h-8 w-8" disabled={isLoading || !inputValue.trim()} onClick={() => handleSendMessage(inputValue)}>
+                                            <Send className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+                                </div>
+                             </div>
+                        </Card>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.3, type: "spring", stiffness: 200 }}
             >
-              <X className="h-4 w-4" />
-            </Button>
-            <div className="flex items-start gap-3">
-              <Sparkles className="h-5 w-5 text-accent flex-shrink-0 mt-1" />
-              <p className="text-sm text-foreground/90">{help.helpMessage}</p>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-      <Button
-        size="icon"
-        className="rounded-full w-14 h-14 bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/40 pulse-button"
-        onClick={handleAvatarClick}
-        disabled={isLoading}
-      >
-        <Bot
-          className={`h-7 w-7 transition-transform duration-300 ${
-            isLoading ? "animate-spin" : ""
-          }`}
-        />
-        <span className="sr-only">AI Career Guide</span>
-      </Button>
-    </div>
-  );
+                <Button
+                    size="icon"
+                    className="rounded-full w-16 h-16 bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/40 pulse-button"
+                    onClick={() => setIsOpen(prev => !prev)}
+                >
+                    <AnimatePresence>
+                        {isOpen ? (
+                            <motion.div key="x" initial={{scale: 0, rotate: 90}} animate={{scale: 1, rotate: 0}} exit={{scale: 0, rotate: 90}}>
+                                <X className="h-8 w-8" />
+                            </motion.div>
+                        ) : (
+                            <motion.div key="bot" initial={{scale: 0, rotate: -90}} animate={{scale: 1, rotate: 0}} exit={{scale: 0, rotate: -90}}>
+                                <Bot className="h-8 w-8" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    <span className="sr-only">AI Career Guide</span>
+                </Button>
+            </motion.div>
+        </div>
+    );
 }

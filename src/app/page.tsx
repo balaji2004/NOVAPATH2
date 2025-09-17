@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Compass, CalendarDays, Map, Trophy, ArrowRight } from 'lucide-react';
+import { Compass, CalendarDays, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const features = [
@@ -17,20 +17,6 @@ const features = [
     description: 'Never miss a deadline with our smart milestone tracker.',
     href: '/timeline',
     delay: '200ms',
-  },
-  {
-    icon: Map,
-    title: '3D Campus Tours',
-    description: 'Explore university campuses in immersive 3D.',
-    href: '/campus-tour',
-    delay: '300ms',
-  },
-  {
-    icon: Trophy,
-    title: 'Achievements',
-    description: 'Gamify your journey and unlock achievements.',
-    href: '/achievements',
-    delay: '400ms',
   },
 ];
 
@@ -58,7 +44,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-20 md:mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="mt-20 md:mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-3xl mx-auto">
         {features.map((feature) => (
           <Link href={feature.href} key={feature.title}>
             <Card

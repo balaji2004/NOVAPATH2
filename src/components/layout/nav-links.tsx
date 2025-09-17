@@ -7,8 +7,6 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { href: '/career-path', label: 'Career Path' },
   { href: '/timeline', label: 'Timeline' },
-  { href: '/campus-tour', label: 'Campus Tour' },
-  { href: '/achievements', label: 'Achievements' },
 ];
 
 export function NavLinks() {
