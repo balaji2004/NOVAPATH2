@@ -15,18 +15,18 @@ export function Logo() {
         </linearGradient>
       </defs>
       <path
-        d="M16 2L19.09 8.26L26 9.27L21 14.14L22.18 21.02L16 17.77L9.82 21.02L11 14.14L6 9.27L12.91 8.26L16 2Z"
+        d="M4 28L12 20M12 20L20 28M12 20L20 12L28 4"
         stroke="url(#logo-gradient)"
-        strokeWidth="2"
-        strokeLinejoin="round"
+        strokeWidth="4"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <path
-        d="M11 14.14L6 9.27L12.91 8.26L16 2L19.09 8.26L26 9.27L21 14.14"
+       <path
+        d="M4 12L12 4L20 12"
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinejoin="round"
+        strokeWidth="4"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
