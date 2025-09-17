@@ -73,7 +73,7 @@ body {
 
 @layer components {
   .holographic-text {
-    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), #8b5cf6, hsl(var(--primary)));
+    background: linear-gradient(90deg, hsl(var(--primary)), #00ccff, #8b5cf6, hsl(var(--primary)));
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
