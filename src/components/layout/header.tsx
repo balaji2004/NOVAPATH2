@@ -7,6 +7,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { ThemeToggleButton } from './theme-toggle-button';
+import { MobileNav } from './mobile-nav';
 
 export function Header() {
   return (
@@ -18,8 +20,10 @@ export function Header() {
         >
           NovaPath
         </Link>
-        <NavLinks />
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="hidden md:flex flex-1">
+          <NavLinks />
+        </div>
+        <div className="ml-auto flex items-center space-x-2">
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -39,6 +43,12 @@ export function Header() {
             <User className="h-5 w-5 text-foreground/80" />
             <span className="sr-only">Profile</span>
           </Button>
+
+          <ThemeToggleButton />
+          
+          <div className="md:hidden">
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>

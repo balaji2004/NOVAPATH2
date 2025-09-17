@@ -90,14 +90,24 @@ body {
     transition: all 0.3s ease;
   }
 
+  .dark .glass-card {
+    background-color: hsla(0, 0%, 8%, 0.5);
+  }
+
+  .light .glass-card {
+    background-color: hsla(0, 0%, 100%, 0.5);
+    border: 1px solid hsla(0, 0%, 0%, 0.1));
+  }
+
+
   .glass-card:hover {
     border-color: hsla(var(--accent), 0.5);
     box-shadow: 0 0 30px -10px hsl(var(--accent));
   }
 
-  .pulse-button {
+  .animate-pulse-glow {
     box-shadow: 0 0 10px 0 hsl(var(--accent)), 0 0 20px 0 hsla(var(--accent), 0.5);
-    animation: pulse-animation 2s infinite;
+    animation: pulse-glow-animation 2s infinite;
   }
 }
 
@@ -107,7 +117,7 @@ body {
   }
 }
 
-@keyframes pulse-animation {
+@keyframes pulse-glow-animation {
   0% {
     transform: scale(1);
     box-shadow: 0 0 10px 0 hsl(var(--accent)), 0 0 20px 0 hsla(var(--accent), 0.5);

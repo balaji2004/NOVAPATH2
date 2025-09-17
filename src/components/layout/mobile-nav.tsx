@@ -1,0 +1,59 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { navItems } from "./nav-links";
+import { cn } from "@/lib/utils";
+
+export function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setIsOpen(true)}
+        className="md:hidden"
+      >
+        <Menu className="h-6 w-6" />
+        <span className="sr-only">Open Menu</span>
+      </Button>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-in fade-in-20 md:hidden">
+          <div className="fixed left-0 top-0 z-50 h-full w-full max-w-xs bg-background shadow-lg animate-in slide-in-from-left-80">
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                <Link
+                  href="/"
+                  className="font-headline font-bold text-2xl holographic-text"
+                  onClick={() => setIsOpen(false)}
+                >
+                  NovaPath
+                </Link>
+                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+                  <X className="h-6 w-6" />
+                  <span className="sr-only">Close Menu</span>
+                </Button>
+              </div>
+              <nav className="mt-8 flex flex-col space-y-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

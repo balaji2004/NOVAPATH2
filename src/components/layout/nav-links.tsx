@@ -4,14 +4,25 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
-const navItems = [
+export const navItems = [
   { href: '/quiz', label: 'Quiz' },
   { href: '/timeline', label: 'Timeline' },
   { href: '/career-path', label: 'Career Path' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export function NavLinks() {
   const pathname = usePathname();
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const href = e.currentTarget.href;
+    if (href.includes("/#")) {
+      e.preventDefault();
+      const targetId = href.split('#')[1];
+      const elem = document.getElementById(targetId);
+      elem?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -19,6 +30,7 @@ export function NavLinks() {
         <Link
           key={item.href}
           href={item.href}
+          onClick={item.href.includes('/#') ? handleScroll : undefined}
           className={cn(
             'transition-colors hover:text-foreground/80 relative',
             pathname === item.href ? 'text-foreground' : 'text-foreground/60'

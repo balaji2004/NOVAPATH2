@@ -23,7 +23,7 @@ export default function Home() {
           An ultra-modern guidance platform using AI to illuminate your career and educational journey. Step into the future of decision-making.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild size="lg" className="pulse-button shadow-primary/50 shadow-lg hover:shadow-primary/50 hover:shadow-2xl transition-shadow">
+          <Button asChild size="lg" className="animate-pulse-glow shadow-primary/50 shadow-lg hover:shadow-primary/50 hover:shadow-2xl transition-shadow">
             <Link href="/quiz">
               Find Your Path <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -68,7 +68,7 @@ export default function Home() {
                 Have questions? We'd love to hear from you.
             </p>
         </div>
-        <Card className="max-w-3xl mx-auto bg-card/60 backdrop-blur-md border border-primary/20 p-8">
+        <Card className="max-w-3xl mx-auto glass-card p-8">
             <form action="#" method="POST" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -105,7 +105,7 @@ export default function Home() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <Card className="bg-card/60 backdrop-blur-md border border-primary/20 p-8 text-center items-center flex flex-col hover:border-primary/40 transition-all duration-300 transform hover:-translate-y-2">
+    <Card className="glass-card p-8 text-center items-center flex flex-col hover:border-accent/50 transition-all duration-300 transform hover:-translate-y-2">
       <div className="mb-4">{icon}</div>
       <h3 className="font-headline text-2xl font-bold mb-2">{title}</h3>
       <p className="text-muted-foreground">{description}</p>

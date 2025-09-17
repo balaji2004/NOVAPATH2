@@ -6,6 +6,8 @@ import { BackgroundParticles } from '@/components/layout/background-particles';
 import { AIAvatar } from '@/components/layout/ai-avatar';
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from "@vercel/analytics/react"
+import { ThemeProvider } from '@/components/layout/theme-provider';
+import { Footer } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
   title: 'NovaPath',
@@ -19,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -37,12 +39,22 @@ export default function RootLayout({
           'font-body antialiased bg-background text-foreground min-h-screen'
         )}
       >
-        <BackgroundParticles />
-        <Header />
-        <main className="relative z-10">{children}</main>
-        <AIAvatar />
-        <Toaster />
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex flex-col min-h-screen">
+            <BackgroundParticles />
+            <Header />
+            <main className="relative z-10 flex-grow">{children}</main>
+            <Footer />
+          </div>
+          <AIAvatar />
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
