@@ -121,7 +121,10 @@ export function TimelineView() {
                         <AccordionItem value="item-1" className="border-b-0">
                           <AccordionTrigger className="p-4 hover:no-underline">
                               <div className="w-full">
-                                <CardDescription className={cn("mb-1", color)}>{event.category}</CardDescription>
+                                <div className="flex justify-between items-start">
+                                  <CardDescription className={cn("mb-1", color)}>{event.category}</CardDescription>
+                                  <CardDescription className={cn("mb-1 text-xs")}>{event.domain}</CardDescription>
+                                </div>
                                 <CardTitle className="text-lg font-headline text-left">{event.title}</CardTitle>
                                 <div className="text-sm text-muted-foreground mt-2 text-left">{event.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
                               </div>

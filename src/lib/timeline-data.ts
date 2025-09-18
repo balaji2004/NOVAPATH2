@@ -11,6 +11,7 @@ export interface TimelineEvent {
   date: Date;
   startDate?: Date;
   category: TimelineCategory;
+  domain: string;
 }
 
 export const timelineData: TimelineEvent[] = [
@@ -22,6 +23,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2025-11-30"),
     startDate: new Date("2025-11-01"),
     category: "Admissions",
+    domain: "Engineering / Architecture (B.Tech, B.E, B.Arch, B.Plan)",
   },
   {
     id: "jee-main-exam-1",
@@ -30,6 +32,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-01-31"),
     startDate: new Date("2026-01-20"),
     category: "Exams",
+    domain: "Engineering / Architecture",
   },
   {
     id: "jee-main-exam-2",
@@ -38,6 +41,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-04-30"),
     startDate: new Date("2026-04-01"),
     category: "Exams",
+    domain: "Engineering / Architecture",
   },
   {
     id: "jee-advanced-reg",
@@ -46,6 +50,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-05-15"),
     startDate: new Date("2026-04-28"),
     category: "Admissions",
+    domain: "Engineering (IITs)",
   },
   {
     id: "jee-advanced-exam",
@@ -53,6 +58,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Exam date for JEE Advanced. Official Website: jeeadv.ac.in",
     date: new Date("2026-05-31"),
     category: "Exams",
+    domain: "Engineering (IITs)",
   },
   {
     id: "bitsat-exam-1",
@@ -61,6 +67,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-05-30"),
     startDate: new Date("2026-05-26"),
     category: "Exams",
+    domain: "Engineering, Sciences, Pharmacy",
   },
   {
     id: "bitsat-exam-2",
@@ -69,6 +76,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-06-30"),
     startDate: new Date("2026-06-15"),
     category: "Exams",
+    domain: "Engineering, Sciences, Pharmacy",
   },
 
   // Medical
@@ -79,6 +87,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2026-03-31"),
     startDate: new Date("2026-02-01"),
     category: "Admissions",
+    domain: "Medical / Dental / AYUSH (MBBS, BDS, etc.)",
   },
   {
     id: "neet-ug-exam",
@@ -86,6 +95,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Tentative exam date for NEET (UG). Official Website: neet.nta.nic.in",
     date: new Date("2026-05-03"),
     category: "Exams",
+    domain: "Medical / Dental / AYUSH",
   },
   {
     id: "neet-ug-results",
@@ -93,6 +103,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Result announcement for NEET (UG). Official Website: neet.nta.nic.in",
     date: new Date("2026-06-15"),
     category: "Results",
+    domain: "Medical / Dental / AYUSH",
   },
 
   // Law
@@ -103,6 +114,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2025-10-31"),
     startDate: new Date("2025-08-01"),
     category: "Admissions",
+    domain: "Law (BA LLB, LLM)",
   },
   {
     id: "clat-exam",
@@ -110,6 +122,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Exam date for CLAT (UG & PG). Official Website: consortiumofnlus.ac.in",
     date: new Date("2025-12-07"),
     category: "Exams",
+    domain: "Law",
   },
 
   // Design
@@ -120,6 +133,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2025-12-01"),
     startDate: new Date("2025-09-11"),
     category: "Admissions",
+    domain: "Design (B.Des, M.Des)",
   },
   {
     id: "nid-dat-prelims",
@@ -127,6 +141,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Exam date for NID DAT Prelims. Official Website: admissions.nid.edu",
     date: new Date("2025-12-21"),
     category: "Exams",
+    domain: "Design",
   },
   {
     id: "nift-exam",
@@ -134,6 +149,15 @@ export const timelineData: TimelineEvent[] = [
     description: "Tentative exam date for NIFT. Official Website: nift.ac.in",
     date: new Date("2026-02-15"),
     category: "Exams",
+    domain: "Fashion & Design",
+  },
+    {
+    id: "uceed-exam",
+    title: "UCEED 2026 Exam",
+    description: "Undergraduate Common Entrance Exam for Design in IITs.",
+    date: new Date("2026-01-19"),
+    category: "Exams",
+    domain: "Design (B.Des)",
   },
 
   // Existing Data
@@ -144,6 +168,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2024-09-05"),
     startDate: new Date("2024-08-01"),
     category: "Exams",
+    domain: "General Undergraduate",
   },
   {
     id: "early-admissions-1",
@@ -152,6 +177,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2024-11-01"),
     startDate: new Date("2024-09-01"),
     category: "Admissions",
+    domain: "General Undergraduate",
   },
   {
     id: "tech-innovators-scholarship",
@@ -160,6 +186,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2024-12-15"),
     startDate: new Date("2024-10-01"),
     category: "Scholarships",
+    domain: "STEM",
   },
   {
     id: "ap-results",
@@ -167,6 +194,7 @@ export const timelineData: TimelineEvent[] = [
     description: "Advanced Placement (AP) exam scores are released to students.",
     date: new Date("2024-07-08"),
     category: "Results",
+    domain: "General Undergraduate",
   },
   {
     id: "act-exam-1",
@@ -174,6 +202,7 @@ export const timelineData: TimelineEvent[] = [
     description: "National testing date for the ACT exam.",
     date: new Date("2024-10-26"),
     category: "Exams",
+    domain: "General Undergraduate",
   },
   {
     id: "uc-apps",
@@ -182,6 +211,7 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2024-11-30"),
     startDate: new Date("2024-08-01"),
     category: "Admissions",
+    domain: "General Undergraduate",
   },
   {
     id: "coca-cola-scholars",
@@ -190,5 +220,6 @@ export const timelineData: TimelineEvent[] = [
     date: new Date("2024-10-31"),
     startDate: new Date("2024-08-01"),
     category: "Scholarships",
+    domain: "General Undergraduate",
   },
 ];
