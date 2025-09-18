@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -11,8 +12,8 @@ import { Badge } from '../ui/badge';
 import { cn } from '@/lib/utils';
 
 export function QASection() {
-  const [showQuestionForm, setShowQuestionForm = useState(false);
-  const [selectedTags, setSelectedTags = useState<string[]>([]);
+  const [showQuestionForm, setShowQuestionForm] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
