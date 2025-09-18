@@ -1,4 +1,33 @@
-import { QASection } from '@/components/peer-forum/qa-section';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const QASection = dynamic(
+  () => import('@/components/peer-forum/qa-section-dynamic').then(mod => mod.QASection),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="max-w-4xl mx-auto">
+        <div className="flex justify-between items-center mb-6">
+          <Skeleton className="h-10 w-48" />
+          <Skeleton className="h-10 w-40" />
+        </div>
+        <div className="mb-8 p-4 rounded-lg glass-card space-y-3">
+          <Skeleton className="h-6 w-32" />
+          <div className="flex flex-wrap gap-2">
+            <Skeleton className="h-6 w-24 rounded-full" />
+            <Skeleton className="h-6 w-20 rounded-full" />
+            <Skeleton className="h-6 w-28 rounded-full" />
+            <Skeleton className="h-6 w-24 rounded-full" />
+          </div>
+        </div>
+        <div className="space-y-6">
+          <Skeleton className="h-40 w-full" />
+          <Skeleton className="h-40 w-full" />
+        </div>
+      </div>
+    )
+  }
+);
 
 export default function QAPage() {
   return (
@@ -12,9 +41,7 @@ export default function QAPage() {
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto">
-        <QASection />
-      </div>
+      <QASection />
     </div>
   );
 }

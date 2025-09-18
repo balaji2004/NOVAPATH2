@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -26,7 +25,7 @@ export function QASection() {
     : forumQuestions;
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold font-headline holographic-text">Q&A Forum</h2>
         <Button onClick={() => setShowQuestionForm(!showQuestionForm)}>
