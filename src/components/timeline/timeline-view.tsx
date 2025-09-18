@@ -102,7 +102,7 @@ export function TimelineView() {
             
             return (
               <div key={event.id} className="relative pl-10 md:pl-0">
-                <div className="md:flex items-center md:space-x-8">
+                <div className="md:flex md:items-center md:space-x-8">
                   <div className={cn("hidden md:block w-1/2", index % 2 === 0 ? "text-right" : "order-2 text-left")}>
                      {!isPast && event.startDate && (
                       <div>
@@ -112,7 +112,7 @@ export function TimelineView() {
                       </div>
                      )}
                   </div>
-                  <div className="absolute top-1 left-4 md:left-1/2 -ml-4 z-10 w-8 h-8 rounded-full flex items-center justify-center bg-background border-2 border-primary">
+                  <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-1/2 -ml-4 z-10 w-8 h-8 rounded-full flex items-center justify-center bg-background border-2 border-primary">
                     <Icon className={cn("w-4 h-4", color)} />
                   </div>
                   <div className={cn("md:w-1/2", index % 2 !== 0 && "md:order-1")}>
