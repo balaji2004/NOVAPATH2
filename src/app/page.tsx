@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User, HeartHandshake } from 'lucide-react';
+import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User, HeartHandshake, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -56,6 +56,35 @@ export default function Home() {
             title="Nova - Smart AI Assistant"
             description="Nova is your dedicated AI assistant, ready to provide career guidance and educational recommendations."
           />
+        </div>
+      </section>
+
+      <section id="peer-to-peer-forum" className="mt-24 md:mt-32 scroll-mt-20">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                Peer-to-Peer Forum
+            </h2>
+            <p className="mt-2 text-lg text-muted-foreground">
+              Crowdsourced Guidance from Slightly Senior Students.
+            </p>
+        </div>
+        <div className="max-w-4xl mx-auto">
+            <Card className="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                    <Users className="w-24 h-24 text-primary" />
+                </div>
+                <div className="flex-grow">
+                    <h3 className="font-headline text-2xl font-bold mb-2">Connect and Learn from Peers</h3>
+                    <p className="text-muted-foreground mb-4">
+                        Get real advice from students just a few steps ahead of you. Find mentors, ask questions anonymously, and get a reality check on your future choices.
+                    </p>
+                    <Button asChild>
+                        <Link href="/peer-to-peer-forum">
+                            Join the Forum <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                    </Button>
+                </div>
+            </Card>
         </div>
       </section>
 
