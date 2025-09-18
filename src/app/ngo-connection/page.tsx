@@ -1,5 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, GraduationCap, Phone } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Briefcase, GraduationCap, ExternalLink, Mail, Phone, Globe } from "lucide-react";
 import Link from "next/link";
 
 export default function NGOConnectionPage() {

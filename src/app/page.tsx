@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, HeartHandshake, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Send, User } from 'lucide-react';
+import { Mail, Send, User, MessageSquare, Star } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -84,44 +84,103 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="mt-24 md:mt-32 scroll-mt-20">
+      <section id="feedback" className="mt-24 md:mt-32 scroll-mt-20">
         <div className="text-center mb-12">
             <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                Get in Touch
+                Feedback Forum
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-                Have questions? We'd love to hear from you.
+                Share your thoughts and help us improve NovaPath.
             </p>
         </div>
-        <Card className="max-w-3xl mx-auto glass-card p-8">
+        
+        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Submit Feedback Form */}
+          <Card className="glass-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <MessageSquare className="h-6 w-6 text-primary" />
+              <h3 className="font-headline text-2xl font-bold">Submit Feedback</h3>
+            </div>
             <form action="#" method="POST" className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium text-muted-foreground">Full Name</label>
-                        <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input id="name" name="name" type="text" placeholder="John Doe" className="pl-10" />
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                         <label htmlFor="email" className="text-sm font-medium text-muted-foreground">Email Address</label>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input id="email" name="email" type="email" placeholder="you@example.com" className="pl-10"/>
-                        </div>
-                    </div>
+              <div className="space-y-2">
+                <label htmlFor="feedback-type" className="text-sm font-medium text-muted-foreground">Feedback Type</label>
+                <select id="feedback-type" name="feedback-type" className="w-full p-3 rounded-lg border border-input bg-background text-foreground">
+                  <option value="suggestion">Suggestion</option>
+                  <option value="bug-report">Bug Report</option>
+                  <option value="feature-request">Feature Request</option>
+                  <option value="general">General Feedback</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="feedback-title" className="text-sm font-medium text-muted-foreground">Title</label>
+                <Input id="feedback-title" name="feedback-title" type="text" placeholder="Brief summary of your feedback" />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="feedback-message" className="text-sm font-medium text-muted-foreground">Your Feedback</label>
+                <Textarea id="feedback-message" name="feedback-message" rows={5} placeholder="Tell us what you think..." />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="rating" className="text-sm font-medium text-muted-foreground">Overall Rating</label>
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="h-6 w-6 text-muted-foreground hover:text-yellow-400 cursor-pointer transition-colors" />
+                  ))}
                 </div>
-                <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-muted-foreground">Message</label>
-                    <Textarea id="message" name="message" rows={5} placeholder="Your message..." />
-                </div>
-                <div>
-                    <Button type="submit" className="w-full" size="lg">
-                        Send Message <Send className="ml-2 h-5 w-5" />
-                    </Button>
-                </div>
+              </div>
+              <Button type="submit" className="w-full" size="lg">
+                Submit Feedback <Send className="ml-2 h-5 w-5" />
+              </Button>
             </form>
-        </Card>
+          </Card>
+
+          {/* Recent Feedback Display */}
+          <Card className="glass-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Users className="h-6 w-6 text-primary" />
+              <h3 className="font-headline text-2xl font-bold">Recent Feedback</h3>
+            </div>
+            <div className="space-y-4">
+              <div className="p-4 rounded-lg border border-border bg-muted/30">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="font-semibold text-sm">Love the AI Career Matcher!</h4>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className={`h-3 w-3 ${star <= 5 ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mb-1">Feature Request • by Anonymous</p>
+                <p className="text-sm">The career matching feature is amazing! Could you add more tech career options?</p>
+              </div>
+              
+              <div className="p-4 rounded-lg border border-border bg-muted/30">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="font-semibold text-sm">Timeline Feature Suggestion</h4>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4].map((star) => (
+                      <Star key={star} className={`h-3 w-3 ${star <= 4 ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mb-1">Suggestion • by Student</p>
+                <p className="text-sm">The timeline is helpful, but could you add reminder notifications?</p>
+              </div>
+              
+              <div className="p-4 rounded-lg border border-border bg-muted/30">
+                <div className="flex items-start justify-between mb-2">
+                  <h4 className="font-semibold text-sm">Great Platform Overall</h4>
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className={`h-3 w-3 ${star <= 5 ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mb-1">General • by User123</p>
+                <p className="text-sm">NovaPath has been incredibly helpful for my career planning. Keep up the great work!</p>
+              </div>
+            </div>
+          </Card>
+        </div>
       </section>
 
     </div>
