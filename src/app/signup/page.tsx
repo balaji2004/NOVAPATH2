@@ -28,6 +28,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -68,7 +69,7 @@ export default function SignupPage() {
   };
 
   const handleGoogleLogin = async () => {
-    setIsLoading(true);
+    setIsGoogleLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(auth, provider);
@@ -92,7 +93,7 @@ export default function SignupPage() {
         description: error.message,
       });
     } finally {
-      setIsLoading(false);
+      setIsGoogleLoading(false);
     }
   };
 
@@ -155,7 +156,7 @@ export default function SignupPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full" disabled={isLoading || isGoogleLoading}>
                 {isLoading ? 'Creating account...' : 'Sign Up'}
               </Button>
             </form>
@@ -170,9 +171,15 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={isLoading}>
-            <GoogleIcon className="mr-2 h-5 w-5" />
-            Google
+          <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={isLoading || isGoogleLoading}>
+             {isGoogleLoading ? (
+              'Signing in...'
+            ) : (
+              <>
+                <GoogleIcon className="mr-2 h-5 w-5" />
+                Google
+              </>
+            )}
           </Button>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">

@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -26,6 +27,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -55,10 +57,19 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    setIsLoading(true);
+    setIsGoogleLoading(true);
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+
+      // Create or update user profile in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        fullName: user.displayName,
+        email: user.email,
+      }, { merge: true });
+
       toast({ title: "Login Successful", description: "Welcome!" });
       router.push('/profile');
     } catch (error: any) {
@@ -68,7 +79,7 @@ export default function LoginPage() {
         description: error.message,
       });
     } finally {
-      setIsLoading(false);
+      setIsGoogleLoading(false);
     }
   };
 
@@ -114,7 +125,7 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full" disabled={isLoading || isGoogleLoading}>
                 {isLoading ? 'Logging in...' : 'Log In'}
               </Button>
             </form>
@@ -129,9 +140,15 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={isLoading}>
-            <GoogleIcon className="mr-2 h-5 w-5" />
-            Google
+          <Button variant="outline" className="w-full" onClick={handleGoogleLogin} disabled={isLoading || isGoogleLoading}>
+            {isGoogleLoading ? (
+              'Logging in...'
+            ) : (
+              <>
+                <GoogleIcon className="mr-2 h-5 w-5" />
+                Google
+              </>
+            )}
           </Button>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
