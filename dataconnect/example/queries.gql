@@ -1,0 +1,24 @@
+mutation CreateSkill @auth(level: USER) {
+  skill_insert(data: {name: "New Skill", description: "Description of the new skill"})
+}
+
+query ListCareers @auth(level: PUBLIC) {
+  careers {
+    id
+    name
+    description
+  }
+}
+
+mutation UpdateUserEmail($id: UUID!, $email: String!) @auth(level: USER) {
+  user_update(key: {id: $id}, data: {email: $email})
+}
+
+query GetEducationPrograms @auth(level: PUBLIC) {
+  educationPrograms {
+    id
+    name
+    institution
+    programType
+  }
+}

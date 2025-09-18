@@ -8,6 +8,7 @@ export const navItems = [
   { href: '/quiz', label: 'Quiz' },
   { href: '/timeline', label: 'Timeline' },
   { href: '/career-path', label: 'Career Path' },
+  { href: '/ngo-connection', label: 'NGO Connection' },
   { href: '/#contact', label: 'Contact' },
 ];
 

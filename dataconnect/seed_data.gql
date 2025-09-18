@@ -1,0 +1,63 @@
+mutation SeedData @auth(level: USER) {
+  career_upsertMany(data: [
+    {
+      name: "Software Engineer",
+      description: "Develops software applications.",
+      averageSalary: 120000,
+      growthOutlook: "High",
+      typicalEducationLevel: "Bachelor's Degree",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      name: "Data Scientist",
+      description: "Analyzes data to extract insights.",
+      averageSalary: 130000,
+      growthOutlook: "Very High",
+      typicalEducationLevel: "Master's Degree",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      name: "Project Manager",
+      description: "Plans and executes projects.",
+      averageSalary: 110000,
+      growthOutlook: "Medium",
+      typicalEducationLevel: "Bachelor's Degree",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  skill_upsertMany(data: [
+    {
+      name: "Java",
+      description: "A popular programming language.",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      name: "Python",
+      description: "A versatile programming language.",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      name: "Data Analysis",
+      description: "The process of inspecting, cleansing, transforming, and modeling data.",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+  educationProgram_upsertMany(data: [
+    {
+      institution: "Stanford University",
+      name: "Computer Science",
+      programType: "Bachelor's Degree",
+      cost: 60000.0,
+      duration: "4 years",
+      createdAt: "2024-01-01T00:00:00Z"
+    },
+    {
+      institution: "MIT",
+      name: "Data Science",
+      programType: "Master's Degree",
+      cost: 70000.0,
+      duration: "2 years",
+      createdAt: "2024-01-01T00:00:00Z"
+    }
+  ])
+}

@@ -1,0 +1,47 @@
+type User @table {
+  email: String!
+  createdAt: Timestamp!
+  firstName: String
+  lastName: String
+  profilePictureUrl: String
+  currentCareerInterest: Career
+}
+
+type Career @table {
+  name: String!
+  description: String!
+  createdAt: Timestamp!
+  averageSalary: Int
+  growthOutlook: String
+  typicalEducationLevel: String
+}
+
+type Skill @table {
+  name: String!
+  createdAt: Timestamp!
+  description: String
+}
+
+type EducationProgram @table {
+  name: String!
+  institution: String!
+  programType: String!
+  createdAt: Timestamp!
+  description: String
+  duration: String
+  cost: Float
+  websiteUrl: String
+}
+
+type UserCareerInterest @table(key: ["user", "career"]) {
+  user: User!
+  career: Career!
+  createdAt: Timestamp!
+  notes: String
+}
+
+type CareerSkill @table(key: ["career", "skill"]) {
+  career: Career!
+  skill: Skill!
+  importanceLevel: String!
+}

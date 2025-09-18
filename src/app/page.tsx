@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User } from 'lucide-react';
+import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User, HeartHandshake } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -13,7 +13,7 @@ export default function Home() {
         <div className="absolute top-[-1rem] -right-24 w-80 h-80 bg-accent rounded-full mix-blend-lighten filter blur-3xl opacity-20 animate-float" style={{animationDelay: '2s'}}></div>
       </div>
       <section className="text-center relative z-10">
-        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-foreground/80 to-foreground mb-6">
+        <h1 className="font-headline text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 mb-6">
           Navigate Your Future with
           <span className="block bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary mt-2">
             NovaPath
@@ -35,7 +35,7 @@ export default function Home() {
       </section>
 
       <section className="mt-24 md:mt-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard
             icon={<Target className="h-8 w-8 text-primary" />}
             title="AI Career Matcher"
@@ -56,6 +56,35 @@ export default function Home() {
             title="Nova - Smart AI Assistant"
             description="Nova is your dedicated AI assistant, ready to provide career guidance and educational recommendations."
           />
+        </div>
+      </section>
+
+      <section id="ngo-connection" className="mt-24 md:mt-32 scroll-mt-20">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                Connect with NGOs
+            </h2>
+            <p className="mt-2 text-lg text-muted-foreground">
+                Find meaningful opportunities to make a difference.
+            </p>
+        </div>
+        <div className="max-w-4xl mx-auto">
+            <Card className="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                    <HeartHandshake className="w-24 h-24 text-primary" />
+                </div>
+                <div className="flex-grow">
+                    <h3 className="font-headline text-2xl font-bold mb-2">Partner with Purpose</h3>
+                    <p className="text-muted-foreground mb-4">
+                        Discover and connect with NGOs that align with your passions and career goals. Volunteer, intern, and contribute to causes that matter.
+                    </p>
+                    <Button asChild>
+                        <Link href="/ngo-connection">
+                            Explore NGO Connections <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                    </Button>
+                </div>
+            </Card>
         </div>
       </section>
 
