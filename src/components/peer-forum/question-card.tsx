@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { ForumQuestion, ForumAnswer as ForumAnswerType } from '@/lib/forum-data';
@@ -14,8 +15,8 @@ import { Separator } from '../ui/separator';
 import { Badge } from '../ui/badge';
 
 export function QuestionCard({ question }: { question: ForumQuestion }) {
-  const [showAnswers, setShowAnswers = useState(false);
-  const [isReplying, setIsReplying = useState(false);
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
 
   return (
     <Card className="glass-card">
