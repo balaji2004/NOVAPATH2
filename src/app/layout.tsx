@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
@@ -8,6 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from '@/components/layout/theme-provider';
 import { Footer } from '@/components/layout/footer';
+import { Providers } from '@/components/layout/auth-provider';
 
 export const metadata: Metadata = {
   title: 'NovaPath',
@@ -39,22 +41,24 @@ export default function RootLayout({
           'font-body antialiased bg-background text-foreground min-h-screen'
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex flex-col min-h-screen">
-            <BackgroundParticles />
-            <Header />
-            <main className="relative z-10 flex-grow">{children}</main>
-            <Footer />
-          </div>
-          <AIAvatar />
-          <Toaster />
-          <Analytics />
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex flex-col min-h-screen">
+              <BackgroundParticles />
+              <Header />
+              <main className="relative z-10 flex-grow">{children}</main>
+              <Footer />
+            </div>
+            <AIAvatar />
+            <Toaster />
+            <Analytics />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

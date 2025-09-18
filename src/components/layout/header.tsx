@@ -1,7 +1,8 @@
+
 import Link from 'next/link';
 import { NavLinks } from './nav-links';
 import { Button } from '../ui/button';
-import { Bell, User } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
@@ -10,6 +11,7 @@ import {
 import { ThemeToggleButton } from './theme-toggle-button';
 import { MobileNav } from './mobile-nav';
 import { Logo } from '../icons/logo';
+import { UserMenu } from './user-menu';
 
 export function Header() {
   return (
@@ -41,10 +43,7 @@ export function Header() {
             </PopoverContent>
           </Popover>
 
-          <Button variant="ghost" size="icon">
-            <User className="h-5 w-5 text-foreground/80" />
-            <span className="sr-only">Profile</span>
-          </Button>
+          <UserMenu />
 
           <ThemeToggleButton />
           
