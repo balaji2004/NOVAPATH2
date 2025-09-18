@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, Send, Mail, User, HeartHandshake, Users } from 'lucide-react';
+import { ArrowRight, Bot, CalendarCheck, Target, FileQuestion, HeartHandshake, Users } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Mail, Send, User } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -34,86 +35,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mt-24 md:mt-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FeatureCard
-            icon={<Target className="h-8 w-8 text-primary" />}
-            title="AI Career Matcher"
-            description="Our advanced AI analyzes your interests, skills, and personality to suggest the perfect career paths for you."
-          />
-          <FeatureCard
-            icon={<CalendarCheck className="h-8 w-8 text-primary" />}
-            title="Interactive Timeline"
-            description="Never miss a deadline. Track exams, admissions, and scholarships on a personalized, interactive timeline."
-          />
-          <FeatureCard
-            icon={<FileQuestion className="h-8 w-8 text-primary" />}
-            title="Gamified Quiz System"
-            description="Engaging quizzes make self-discovery fun. Watch your future unfold with every answer."
-          />
-          <FeatureCard
-            icon={<Bot className="h-8 w-8 text-primary" />}
-            title="Nova - Smart AI Assistant"
-            description="Nova is your dedicated AI assistant, ready to provide career guidance and educational recommendations."
-          />
-        </div>
-      </section>
-
-      <section id="peer-to-peer-forum" className="mt-24 md:mt-32 scroll-mt-20">
+      <section id="features" className="mt-24 md:mt-32 scroll-mt-20">
         <div className="text-center mb-12">
             <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                Peer-to-Peer Forum
+                Explore Our Features
             </h2>
             <p className="mt-2 text-lg text-muted-foreground">
-              Crowdsourced Guidance from Slightly Senior Students.
+              A suite of tools designed to guide you to success.
             </p>
         </div>
-        <div className="max-w-4xl mx-auto">
-            <Card className="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-shrink-0">
-                    <Users className="w-24 h-24 text-primary" />
-                </div>
-                <div className="flex-grow">
-                    <h3 className="font-headline text-2xl font-bold mb-2">Connect and Learn from Peers</h3>
-                    <p className="text-muted-foreground mb-4">
-                        Get real advice from students just a few steps ahead of you. Find mentors, ask questions anonymously, and get a reality check on your future choices.
-                    </p>
-                    <Button asChild>
-                        <Link href="/peer-to-peer-forum">
-                            Join the Forum <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
-                    </Button>
-                </div>
-            </Card>
-        </div>
-      </section>
-
-      <section id="ngo-connection" className="mt-24 md:mt-32 scroll-mt-20">
-        <div className="text-center mb-12">
-            <h2 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                Connect with NGOs
-            </h2>
-            <p className="mt-2 text-lg text-muted-foreground">
-                Find meaningful opportunities to make a difference.
-            </p>
-        </div>
-        <div className="max-w-4xl mx-auto">
-            <Card className="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-shrink-0">
-                    <HeartHandshake className="w-24 h-24 text-primary" />
-                </div>
-                <div className="flex-grow">
-                    <h3 className="font-headline text-2xl font-bold mb-2">Partner with Purpose</h3>
-                    <p className="text-muted-foreground mb-4">
-                        Discover and connect with NGOs that align with your passions and career goals. Volunteer, intern, and contribute to causes that matter.
-                    </p>
-                    <Button asChild>
-                        <Link href="/ngo-connection">
-                            Explore NGO Connections <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
-                    </Button>
-                </div>
-            </Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard
+                href="/quiz"
+                icon={<FileQuestion className="h-8 w-8 text-primary" />}
+                title="Gamified Quiz System"
+                description="Engaging quizzes make self-discovery fun. Watch your future unfold with every answer."
+            />
+            <FeatureCard
+                href="/timeline"
+                icon={<CalendarCheck className="h-8 w-8 text-primary" />}
+                title="Interactive Timeline"
+                description="Never miss a deadline. Track exams, admissions, and scholarships on a personalized, interactive timeline."
+            />
+            <FeatureCard
+                href="/career-path"
+                icon={<Target className="h-8 w-8 text-primary" />}
+                title="AI Career Matcher"
+                description="Our AI suggests perfect career paths by analyzing your interests, skills, and personality."
+            />
+            <FeatureCard
+                href="/peer-to-peer-forum"
+                icon={<Users className="h-8 w-8 text-primary" />}
+                title="Peer-to-Peer Forum"
+                description="Get real advice from students just a few steps ahead of you. Find mentors and ask questions."
+            />
+            <FeatureCard
+                href="/ngo-connection"
+                icon={<HeartHandshake className="h-8 w-8 text-primary" />}
+                title="NGO Connection"
+                description="Discover and connect with NGOs that align with your passions and career goals."
+            />
+            <FeatureCard
+                href="#"
+                icon={<Bot className="h-8 w-8 text-primary" />}
+                title="Nova - Smart AI Assistant"
+                description="Nova is your dedicated AI assistant, ready to provide career guidance and recommendations."
+            />
         </div>
       </section>
 
@@ -161,12 +128,28 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
-  return (
-    <Card className="glass-card p-8 text-center items-center flex flex-col hover:border-accent/50 transition-all duration-300 transform hover:-translate-y-2">
+function FeatureCard({ href, icon, title, description }: { href: string; icon: React.ReactNode; title: string; description: string }) {
+  const isExternal = href.startsWith('http');
+  const CardContent = (
+    <Card className="glass-card p-8 text-center items-center flex flex-col h-full hover:border-accent/50 transition-all duration-300 transform hover:-translate-y-2">
       <div className="mb-4">{icon}</div>
       <h3 className="font-headline text-2xl font-bold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+      <p className="text-muted-foreground flex-grow">{description}</p>
     </Card>
+  );
+
+  if (href === '#') {
+    return <div className="cursor-default h-full">{CardContent}</div>
+  }
+  
+  return (
+    <Link 
+      href={href} 
+      target={isExternal ? '_blank' : undefined} 
+      rel={isExternal ? 'noopener noreferrer' : undefined} 
+      className="block h-full"
+    >
+      {CardContent}
+    </Link>
   );
 }
