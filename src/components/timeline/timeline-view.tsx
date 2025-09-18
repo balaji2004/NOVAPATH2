@@ -96,32 +96,24 @@ export function TimelineView() {
         <div className="space-y-12">
           {filteredEvents.map((event, index) => {
             const isPast = event.date < now;
-            const daysRemaining = differenceInDays(event.date, now);
             const progress = event.startDate ? Math.min(100, Math.max(0, (differenceInDays(now, event.startDate) / differenceInDays(event.date, event.startDate)) * 100)) : (isPast ? 100 : 0);
             const { icon: Icon, color } = categoryConfig[event.category];
             
             return (
               <div key={event.id} className="relative pl-10 md:pl-0">
-                <div className="md:flex md:items-center md:space-x-8">
-                  <div className={cn("hidden md:block w-1/2", index % 2 === 0 ? "text-right" : "order-2 text-left")}>
-                     {!isPast && event.startDate && (
-                      <div>
-                        <p className="text-sm text-muted-foreground">Application Window</p>
-                        <Progress value={progress} className="h-2 mt-1 bg-primary/10" />
-                        <p className="text-xs text-muted-foreground mt-1">{Math.round(progress)}% complete</p>
-                      </div>
-                     )}
-                  </div>
-                  <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-1/2 -ml-4 z-10 w-8 h-8 rounded-full flex items-center justify-center bg-background border-2 border-primary">
-                    <Icon className={cn("w-4 h-4", color)} />
-                  </div>
-                  <div className={cn("md:w-1/2", index % 2 !== 0 && "md:order-1")}>
+                <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-1/2 -ml-4 z-10 w-8 h-8 rounded-full flex items-center justify-center bg-background border-2 border-primary">
+                  <Icon className={cn("w-4 h-4", color)} />
+                </div>
+                <div className={cn(
+                  "md:w-1/2",
+                  index % 2 === 0 ? "md:ml-[calc(50%+2rem)]" : "md:mr-[calc(50%+2rem)] md:text-right"
+                )}>
                     <Card className="glass-card">
                       <Accordion type="single" collapsible>
                         <AccordionItem value="item-1" className="border-b-0">
-                          <AccordionTrigger className="p-4 hover:no-underline">
-                              <div className="w-full">
-                                <div className="flex justify-between items-start">
+                          <AccordionTrigger className={cn("p-4 hover:no-underline", index % 2 !== 0 && "md:flex-row-reverse")}>
+                              <div className={cn("w-full", index % 2 !== 0 && "md:text-right")}>
+                                <div className={cn("flex justify-between items-start", index % 2 !== 0 && "md:flex-row-reverse")}>
                                   <CardDescription className={cn("mb-1", color)}>{event.category}</CardDescription>
                                   <CardDescription className={cn("mb-1 text-xs")}>{event.domain}</CardDescription>
                                 </div>
@@ -143,7 +135,6 @@ export function TimelineView() {
                         </AccordionItem>
                       </Accordion>
                     </Card>
-                  </div>
                 </div>
               </div>
             );
