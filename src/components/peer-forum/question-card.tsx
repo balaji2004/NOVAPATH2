@@ -5,26 +5,28 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
-import { ArrowBigUp, MessageSquare, CornerDownRight, Flag } from 'lucide-react';
+import { MessageSquare, Flag } from 'lucide-react';
 import { formatDistanceToNowStrict } from 'date-fns';
 import Link from 'next/link';
 import { ForumAnswer } from './forum-answer';
 import { Textarea } from '../ui/textarea';
 import { Separator } from '../ui/separator';
+import { Badge } from '../ui/badge';
 
 export function QuestionCard({ question }: { question: ForumQuestion }) {
-  const [showAnswers, setShowAnswers] = useState(false);
-  const [isReplying, setIsReplying] = useState(false);
+  const [showAnswers, setShowAnswers = useState(false);
+  const [isReplying, setIsReplying = useState(false);
 
   return (
     <Card className="glass-card">
       <CardHeader>
-        <div className="flex justify-between items-start">
-          <Link href={`/peer-to-peer-forum/question/${question.id}`} className="block">
+        <div className="flex justify-between items-start gap-4">
+          <Link href={`/peer-to-peer-forum/question/${question.id}`} className="block flex-1">
             <CardTitle className="text-xl font-bold hover:text-primary transition-colors">{question.text}</CardTitle>
           </Link>
-          <Button variant="ghost" size="icon" className="flex-shrink-0">
+          <Button variant="ghost" size="icon" className="flex-shrink-0 h-8 w-8">
             <Flag className="h-4 w-4 text-muted-foreground" />
+            <span className="sr-only">Report</span>
           </Button>
         </div>
         <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
@@ -35,6 +37,11 @@ export function QuestionCard({ question }: { question: ForumQuestion }) {
           <span>{question.isAnonymous ? 'Anonymous' : question.author.name}</span>
           <span>•</span>
           <span>{formatDistanceToNowStrict(question.timestamp)} ago</span>
+        </div>
+        <div className="flex flex-wrap gap-2 pt-3">
+            {question.tags.map(tag => (
+                <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+            ))}
         </div>
       </CardHeader>
       <CardContent>

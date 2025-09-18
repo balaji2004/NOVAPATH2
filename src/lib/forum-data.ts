@@ -22,6 +22,7 @@ export interface ForumQuestion {
   author: ForumUser;
   isAnonymous: boolean;
   timestamp: Date;
+  tags: string[];
   answers: ForumAnswer[];
 }
 
@@ -32,6 +33,19 @@ const users: ForumUser[] = [
   { id: 'user-4', name: 'Diana Ray', avatarUrl: '/avatars/04.png' },
 ];
 
+export const forumTags: string[] = [
+  'JEE Advanced',
+  'NEET',
+  'BITSAT',
+  'IIT Bombay',
+  'NIT',
+  'Admissions',
+  '1st Year',
+  'Computer Science',
+  'Drop Year',
+  'Internships'
+];
+
 export const forumQuestions: ForumQuestion[] = [
   {
     id: 'q1',
@@ -39,6 +53,7 @@ export const forumQuestions: ForumQuestion[] = [
     author: users[0],
     isAnonymous: false,
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+    tags: ['JEE Advanced', 'Admissions', 'Drop Year'],
     answers: [
       {
         id: 'a1-1',
@@ -72,6 +87,7 @@ export const forumQuestions: ForumQuestion[] = [
     author: users[2],
     isAnonymous: true,
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3), // 3 days ago
+    tags: ['Drop Year', 'Admissions', 'IIT Bombay', 'NIT'],
     answers: [
       {
         id: 'a2-1',
@@ -89,6 +105,7 @@ export const forumQuestions: ForumQuestion[] = [
     author: users[3],
     isAnonymous: false,
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5), // 5 days ago
+    tags: ['IIT Bombay', 'Computer Science', 'Internships', '1st Year'],
     answers: [
         {
             id: 'a3-1',
