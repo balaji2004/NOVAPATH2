@@ -1,3 +1,4 @@
+
 export type TimelineCategory =
   | "Exams"
   | "Admissions"
@@ -15,7 +16,6 @@ export interface TimelineEvent {
 }
 
 export const timelineData: TimelineEvent[] = [
-  // Existing Data
   {
     id: "ap-results",
     title: "AP Exam Results Announcement",
@@ -77,8 +77,6 @@ export const timelineData: TimelineEvent[] = [
     category: "Scholarships",
     domain: "STEM",
   },
-  
-  // New Data
   {
     id: "clat-reg",
     title: "CLAT 2026 Registration Deadline",
@@ -211,8 +209,8 @@ export const timelineData: TimelineEvent[] = [
     id: "bitsat-exam-2",
     title: "BITSAT 2026 Session 2 Exam",
     description: "Exam period for BITSAT Session 2. Official Website: bitsadmission.com",
-    date: new date("2026-06-30"),
-    startDate: new date("2026-06-15"),
+    date: new Date("2026-06-30"),
+    startDate: new Date("2026-06-15"),
     category: "Exams",
     domain: "Engineering, Sciences, Pharmacy",
   },
