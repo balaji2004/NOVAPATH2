@@ -2,6 +2,7 @@ import { PeerMentorMatching } from '@/components/peer-forum/peer-mentor-matching
 import { QAPlatform } from '@/components/peer-forum/qa-platform';
 import { RealityCheckSystem } from '@/components/peer-forum/reality-check-system';
 import { StudyBuddyFinder } from '@/components/peer-forum/study-buddy-finder';
+import { QASection } from '@/components/peer-forum/qa-section';
 
 export default function PeerToPeerForumPage() {
   return (
@@ -16,8 +17,8 @@ export default function PeerToPeerForumPage() {
       </div>
 
       <div className="space-y-16">
+        <QASection />
         <PeerMentorMatching />
-        <QAPlatform />
         <StudyBuddyFinder />
         <RealityCheckSystem />
       </div>
